@@ -5,14 +5,6 @@ import { Link } from "react-router-dom";
 const projects = [
   {
     id: 1,
-    slug: "servizio-damore",
-    title: "Servizio d'Amore",
-    category: "Visual Identity",
-    image:
-      "https://res.cloudinary.com/dhrtdasn6/image/upload/v1766436877/phototy/mf1o4kzfwsnf2fchxq6t.jpg",
-  },
-  {
-    id: 2,
     slug: "hawkeye",
     title: "Hawkeye®",
     category: "Branding",
@@ -20,11 +12,20 @@ const projects = [
       "https://res.cloudinary.com/dxog5mdzp/image/upload/v1773262163/Layer-01_odfxoc.jpg",
   },
   {
+    id: 2,
+    slug: "servizio-damore",
+    title: "Servizio d'Amore",
+    category: "Visual Identity",
+    image:
+      "https://res.cloudinary.com/dhrtdasn6/image/upload/v1766436877/phototy/mf1o4kzfwsnf2fchxq6t.jpg",
+  },
+  {
     id: 3,
     slug: "logos-marks",
     title: "Logos & Marks",
     category: "Logo Design",
-    image: "-",
+    image:
+      "https://res.cloudinary.com/dxog5mdzp/image/upload/v1773264022/Logofolio25_head_2_yt6sr6.jpg",
   },
 ];
 
