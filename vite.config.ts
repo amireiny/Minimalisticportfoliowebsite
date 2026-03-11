@@ -11,7 +11,6 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
-  base: "/Minimalisticportfoliowebsite/",
   resolve: {
     alias: {
       // Alias @ to the src directory
