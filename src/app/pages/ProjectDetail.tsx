@@ -30,8 +30,17 @@ const projectsData = [
     slug: "hawkeye",
     title: "Hawkeye®",
     category: "Branding",
-    images: ["-"],
-    year: "2024",
+    images: [
+      "https://res.cloudinary.com/dxog5mdzp/image/upload/v1773261427/hawkeye_1.jpeg_uose20.jpg",
+      "https://res.cloudinary.com/dxog5mdzp/image/upload/v1773261426/hawkeye_2_ub2iwp.jpg",
+      "https://res.cloudinary.com/dxog5mdzp/image/upload/v1773261427/hawkeye_3_bcmlld.jpg",
+      "https://res.cloudinary.com/dxog5mdzp/image/upload/v1773261428/hawkeye_4_wgloot.jpg",
+      "https://res.cloudinary.com/dxog5mdzp/image/upload/v1773261426/hawkeye_5_yy1lhn.jpg",
+      "https://res.cloudinary.com/dxog5mdzp/image/upload/v1773261427/hawkeye_6_xjvspu.jpg",
+      "https://res.cloudinary.com/dxog5mdzp/image/upload/v1773261427/hawkeye_7_tcgma1.jpg",
+      "https://res.cloudinary.com/dxog5mdzp/image/upload/v1773261426/hawkeye_8_mqyg1j.jpg",
+    ],
+    year: "2026",
     client: "Hawkeye Technologies",
   },
   {
@@ -68,7 +77,7 @@ export function ProjectDetail() {
 
   const handleBackClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    navigate('/');
+    navigate("/");
   };
 
   return (
@@ -88,13 +97,13 @@ export function ProjectDetail() {
                   <button
                     onClick={handleBackClick}
                     className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full mr-4 flex items-center text-neutral-400 hover:text-neutral-900 transition-all duration-300 hover:-translate-x-[calc(100%+6px)]"
-                    style={{ left: '-40px' }}
+                    style={{ left: "-40px" }}
                     aria-label="Back to previous page"
                   >
                     <ArrowLeft size={20} />
                   </button>
                 </div>
-                
+
                 <p className="text-[14px] text-neutral-600 mb-8">
                   {project.category}
                 </p>
@@ -122,7 +131,7 @@ export function ProjectDetail() {
 
             {/* Right Column - Project Images */}
             <div className="md:col-span-9">
-              <div className="space-y-5">
+              <div className="">
                 {project.images.map((image, index) => (
                   <div
                     key={index}

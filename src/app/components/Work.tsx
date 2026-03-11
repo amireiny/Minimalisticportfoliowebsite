@@ -16,7 +16,8 @@ const projects = [
     slug: "hawkeye",
     title: "Hawkeye®",
     category: "Branding",
-    image: "-",
+    image:
+      "https://res.cloudinary.com/dxog5mdzp/image/upload/v1773262163/Layer-01_odfxoc.jpg",
   },
   {
     id: 3,
