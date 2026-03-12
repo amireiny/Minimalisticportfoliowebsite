@@ -12,6 +12,7 @@ export function Navigation() {
   const [isHovered, setIsHovered] = useState(false);
   const [signatureColor, setSignatureColor] = useState('#000000');
   const [textColor, setTextColor] = useState('#000000');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
 
   const isHomePage = location.pathname === "/";
@@ -195,7 +196,9 @@ export function Navigation() {
               />
             </svg>
           </Link>
-          <div className="flex items-center gap-12 text-sm">
+          
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-12 text-sm">
             <a
               href="#work"
               className="transition-colors"
@@ -224,8 +227,86 @@ export function Navigation() {
               About
             </a>
           </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden flex flex-col gap-1.5 w-6 h-6 justify-center items-end z-50"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            <span
+              className="h-px transition-all duration-300"
+              style={{
+                backgroundColor: textColor,
+                width: isMobileMenuOpen ? '24px' : '24px',
+                transform: isMobileMenuOpen ? 'rotate(45deg) translateY(6px)' : 'none'
+              }}
+            />
+            <span
+              className="h-px transition-all duration-300"
+              style={{
+                backgroundColor: textColor,
+                width: isMobileMenuOpen ? '0px' : '18px',
+                opacity: isMobileMenuOpen ? 0 : 1
+              }}
+            />
+            <span
+              className="h-px transition-all duration-300"
+              style={{
+                backgroundColor: textColor,
+                width: isMobileMenuOpen ? '24px' : '24px',
+                transform: isMobileMenuOpen ? 'rotate(-45deg) translateY(-6px)' : 'none'
+              }}
+            />
+          </button>
         </div>
       </div>
+
+      {/* Mobile Sliding Menu */}
+      <div
+        className={`md:hidden fixed top-0 right-0 h-screen w-64 transition-transform duration-300 ease-in-out ${
+          isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
+        style={{
+          backdropFilter: "blur(40px)",
+          WebkitBackdropFilter: "blur(40px)",
+          backgroundColor: "rgba(255, 255, 255, 0.95)",
+          borderLeft: "1px solid rgba(0, 0, 0, 0.1)",
+        }}
+      >
+        <div className="flex flex-col gap-8 p-8 pt-24">
+          <a
+            href="#work"
+            className="text-2xl text-neutral-900 hover:text-neutral-600 transition-colors"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Work
+          </a>
+          <a
+            href="#contact"
+            className="text-2xl text-neutral-900 hover:text-neutral-600 transition-colors"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Contact
+          </a>
+          <a
+            href="#about"
+            className="text-2xl text-neutral-900 hover:text-neutral-600 transition-colors"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            About
+          </a>
+        </div>
+      </div>
+
+      {/* Overlay */}
+      {isMobileMenuOpen && (
+        <div
+          className="md:hidden fixed inset-0 bg-black/20 backdrop-blur-sm"
+          onClick={() => setIsMobileMenuOpen(false)}
+          style={{ top: '0', left: '0', right: '0', bottom: '0' }}
+        />
+      )}
     </nav>
   );
 }
