@@ -39,7 +39,7 @@ export function Contact() {
                 rel="noopener noreferrer"
                 className="text-neutral-900 hover:text-neutral-600 transition-colors"
               >
-                <Instagram className="w-5 h-5" />
+                
               </a>
               <a
                 href="https://behance.net"

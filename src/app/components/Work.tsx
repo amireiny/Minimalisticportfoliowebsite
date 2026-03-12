@@ -9,7 +9,7 @@ const projects = [
     title: "Hawkeye®",
     category: "Branding",
     image:
-      "https://res.cloudinary.com/dxog5mdzp/image/upload/v1773262163/Layer-01_odfxoc.jpg",
+      "https://res.cloudinary.com/dxog5mdzp/image/upload/v1773278256/hawkeye_head_jugiwb.jpg",
   },
   {
     id: 2,
@@ -25,7 +25,7 @@ const projects = [
     title: "Logos & Marks",
     category: "Logo Design",
     image:
-      "https://res.cloudinary.com/dxog5mdzp/image/upload/v1773264022/Logofolio25_head_2_yt6sr6.jpg",
+      "https://res.cloudinary.com/dxog5mdzp/image/upload/v1773278537/Logofolio25_head_3_nvhcuy.jpg",
   },
 ];
 
