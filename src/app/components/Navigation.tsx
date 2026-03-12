@@ -8,7 +8,7 @@ import { useEffect, useState, useRef } from "react";
 export function Navigation() {
   const location = useLocation();
   const navigate = useNavigate();
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
   const [signatureColor, setSignatureColor] = useState('#000000');
   const [textColor, setTextColor] = useState('#000000');
@@ -40,8 +40,8 @@ export function Navigation() {
         const textY = navTop + navHeight / 2;
 
         // Hide nav temporarily
-        const originalOpacity = navRef.current.style.opacity;
         navRef.current.style.opacity = '0';
+        navRef.current.style.pointerEvents = 'none';
 
         // Use a small delay to ensure rendering
         requestAnimationFrame(() => {
@@ -57,13 +57,19 @@ export function Navigation() {
           const textLuminance = getLuminance(textBg);
           setTextColor(textLuminance < 128 ? '#ffffff' : '#000000');
 
-          // Restore nav
+          // Always restore nav to visible state
           if (navRef.current) {
-            navRef.current.style.opacity = originalOpacity;
+            navRef.current.style.opacity = '1';
+            navRef.current.style.pointerEvents = 'auto';
           }
         });
       } catch (error) {
         console.error('Color detection error:', error);
+        // Ensure nav is visible even if error occurs
+        if (navRef.current) {
+          navRef.current.style.opacity = '1';
+          navRef.current.style.pointerEvents = 'auto';
+        }
       }
     };
 
