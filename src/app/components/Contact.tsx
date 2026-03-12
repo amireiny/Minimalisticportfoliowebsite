@@ -1,5 +1,4 @@
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-import { Instagram, Linkedin, Square } from "lucide-react";
 
 export function Contact() {
   return (
@@ -32,30 +31,36 @@ export function Contact() {
           {/* Right side - Social icons and newsletter */}
           <div className="space-y-8">
             {/* Social icons aligned to the right */}
-            <div className="flex gap-6 justify-end">
+            <div className="flex gap-6 justify-end items-center">
               <a
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-neutral-900 hover:text-neutral-600 transition-colors"
-              >
-                
-              </a>
+              ></a>
               <a
-                href="https://behance.net"
+                href="https://www.behance.net/amireiny"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-neutral-400 hover:text-neutral-600 transition-colors"
+                className="hover:opacity-60 transition-opacity"
               >
-                <Square className="w-5 h-5" />
+                <img
+                  src="https://assets.streamlinehq.com/image/private/w_300,h_300,ar_1/f_auto/v1/icons/logos/behance-39upyjt4o1bcdv2vev4ff.png/behance-hs3khmdlsickcpilkrsz.png?_a=DATAiZAAZAA0"
+                  alt="Behance"
+                  className="w-5 h-5 object-contain"
+                />
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/amireiny/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-neutral-900 hover:text-neutral-600 transition-colors"
+                className="hover:opacity-60 transition-opacity"
               >
-                <Linkedin className="w-5 h-5" />
+                <img
+                  src="https://images.seeklogo.com/logo-png/38/2/linkedin-black-icon-logo-png_seeklogo-387472.png"
+                  alt="LinkedIn"
+                  className="w-5 h-5 object-contain"
+                />
               </a>
             </div>
 

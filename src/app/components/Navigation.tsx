@@ -17,18 +17,8 @@ export function Navigation() {
   const isHomePage = location.pathname === "/";
 
   useEffect(() => {
-    if (!isHomePage) {
-      setIsVisible(true);
-      return;
-    }
-
-    const handleScroll = () => {
-      setIsVisible(window.scrollY > 100);
-    };
-
-    handleScroll();
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    // Always keep navigation visible
+    setIsVisible(true);
   }, [isHomePage]);
 
   // Robust pixel-based background detection
