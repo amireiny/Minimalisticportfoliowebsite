@@ -12,7 +12,11 @@ export function Contact() {
               <div>
                 <a
                   href="mailto:design@amireiny.com"
-                  className="text-neutral-900 hover:text-neutral-600 transition-colors"
+                  className="text-neutral-900 hover:text-neutral-600 transition-colors cursor-pointer"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    window.location.href = 'mailto:design@amireiny.com';
+                  }}
                 >
                   design@amireiny.com
                 </a>
@@ -20,7 +24,10 @@ export function Contact() {
               <div>
                 <a
                   href="tel:+972587099004"
-                  className="text-neutral-900 hover:text-neutral-600 transition-colors"
+                  className="text-neutral-900 hover:text-neutral-600 transition-colors cursor-pointer"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                  }}
                 >
                   +972 58 709 9004
                 </a>
