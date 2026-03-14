@@ -2,6 +2,8 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { Footer } from "../components/Footer";
+import { Navigation } from "../components/Navigation";
+import { useEffect, useRef } from "react";
 
 // This would normally come from an API or database
 const projectsData = [
@@ -70,6 +72,41 @@ export function ProjectDetail() {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const project = projectsData.find((p) => p.slug === slug);
+  const touchStartX = useRef<number>(0);
+  const touchEndX = useRef<number>(0);
+
+  // Swipe gesture handler for mobile
+  useEffect(() => {
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartX.current = e.changedTouches[0].screenX;
+    };
+
+    const handleTouchEnd = (e: TouchEvent) => {
+      touchEndX.current = e.changedTouches[0].screenX;
+      handleSwipe();
+    };
+
+    const handleSwipe = () => {
+      // Only trigger on mobile (screen width < 768px)
+      if (window.innerWidth >= 768) return;
+
+      const swipeDistance = touchEndX.current - touchStartX.current;
+      const minSwipeDistance = 100; // Minimum distance for a swipe
+
+      // Left to right swipe (swipe distance is positive)
+      if (swipeDistance > minSwipeDistance) {
+        navigate("/");
+      }
+    };
+
+    document.addEventListener("touchstart", handleTouchStart);
+    document.addEventListener("touchend", handleTouchEnd);
+
+    return () => {
+      document.removeEventListener("touchstart", handleTouchStart);
+      document.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, [navigate]);
 
   if (!project) {
     return (
@@ -94,8 +131,11 @@ export function ProjectDetail() {
 
   return (
     <div className="min-h-screen">
+      {/* Navigation */}
+      <Navigation />
+      
       {/* Content */}
-      <div className="pt-20 px-6 pb-24">
+      <div className="pt-28 md:pt-20 px-6 pb-24">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-12 gap-12">
             {/* Left Column - Sticky Project Info */}

@@ -222,15 +222,6 @@ export function Navigation() {
             >
               Contact
             </a>
-            <a
-              href="#about"
-              className="transition-colors"
-              style={{ color: textColor }}
-              onMouseEnter={(e) => e.currentTarget.style.color = textHoverColor}
-              onMouseLeave={(e) => e.currentTarget.style.color = textColor}
-            >
-              About
-            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -305,14 +296,6 @@ export function Navigation() {
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Contact
-            </a>
-            <div className="w-full h-px bg-neutral-900" style={{ opacity: 0.1 }} />
-            <a
-              href="#about"
-              className="text-base text-neutral-900 hover:text-neutral-600 transition-colors text-center py-8"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              About
             </a>
           </div>
         </div>
