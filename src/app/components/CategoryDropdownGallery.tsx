@@ -5,6 +5,7 @@ import { FlippableBook } from "./FlippableBook";
 import { SinglePageFlipBook } from "./SinglePageFlipBook";
 import { InfiniteScrollCarousel } from "./InfiniteScrollCarousel";
 import { ProductPhotographyCarousel } from "./ProductPhotographyCarousel";
+import { CorporateGallery } from "./CorporateGallery";
 
 interface CategoryDropdownGalleryProps {
   categorizedImages: Record<string, string[]>;
@@ -181,22 +182,14 @@ export function CategoryDropdownGallery({
                       )}
                     />
                   ) : isCorporate ? (
-                    <div className="grid grid-cols-3 gap-4">
-                      {images.map((image, index) => (
-                        <div
-                          key={index}
-                          className="w-full bg-neutral-100 overflow-hidden aspect-video"
-                        >
-                          <ImageWithFallback
-                            src={image}
-                            alt={`${projectTitle} - ${categoryName} - Image ${
-                              index + 1
-                            }`}
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                      ))}
-                    </div>
+                    <CorporateGallery
+                      images={images}
+                      projectTitle={projectTitle}
+                      categoryName={categoryName}
+                      isFullyOpen={fullyOpenCategories.has(
+                        categoryName,
+                      )}
+                    />
                   ) : (
                     images.map((image, index) => (
                       <div

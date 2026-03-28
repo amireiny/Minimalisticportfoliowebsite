@@ -372,7 +372,7 @@ export function Navigation() {
 
       {/* Mobile Sliding Menu */}
       <div
-        className={`md:hidden fixed left-0 right-0 transition-all duration-300 ease-in-out ${
+        className={`md:hidden fixed left-0 right-0 transition-all duration-300 ease-in-out z-40 ${
           isMobileMenuOpen
             ? "opacity-100 translate-y-0"
             : "opacity-0 -translate-y-4 pointer-events-none"

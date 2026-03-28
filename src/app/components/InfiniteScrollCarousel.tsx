@@ -220,7 +220,7 @@ export function InfiniteScrollCarousel({
               <ImageWithFallback
                 src={image}
                 alt={`${projectTitle} - ${categoryName} - Image ${(index % images.length) + 1}`}
-                className="h-full w-auto object-contain rounded-lg transition-all duration-300 hover:brightness-75"
+                className="h-full w-auto object-contain rounded-lg transition-all duration-300 hover:brightness-75 max-w-full md:max-w-none"
                 draggable={false}
                 style={{ userSelect: 'none' }}
               />

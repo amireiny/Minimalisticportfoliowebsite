@@ -67,6 +67,13 @@ export function SinglePageFlipBook({
   const responsiveWidth = maxWidth;
   const responsiveHeight = responsiveWidth / aspectRatio;
 
+  // Mobile-specific sizing
+  const isMobile = typeof window !== "undefined" ? window.innerWidth < 768 : false;
+  const mobileWidth = isMobile ? window.innerWidth * 0.85 : responsiveWidth;
+  const mobileHeight = isMobile ? mobileWidth / aspectRatio : responsiveHeight;
+  const finalWidth = isMobile ? mobileWidth : responsiveWidth;
+  const finalHeight = isMobile ? mobileHeight : responsiveHeight;
+
   return (
     <div className="flex flex-col items-center gap-6 py-8">
       <div 
@@ -111,8 +118,8 @@ export function SinglePageFlipBook({
           <div style={{ position: 'relative', zIndex: 10 }}>
             <HTMLFlipBook
               ref={bookRef}
-              width={responsiveWidth}
-              height={responsiveHeight}
+              width={finalWidth}
+              height={finalHeight}
               size="stretch"
               minWidth={400}
               maxWidth={3000}

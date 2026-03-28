@@ -23,21 +23,21 @@ export function ProductPhotographyCarousel({
       <div className="flex flex-col gap-4">
         {/* First row - two images side by side */}
         {displayImages.length >= 2 && (
-          <div className="flex gap-6">
-            <div className="flex-shrink-0">
+          <div className="flex gap-6 md:flex-row flex-col">
+            <div className="flex-shrink-0 w-full md:w-auto">
               <ImageWithFallback
                 src={displayImages[0]}
                 alt={`${projectTitle} - ${categoryName} - Image 1`}
                 className="w-full h-auto object-cover"
-                style={{ width: "506px", height: "674px" }}
+                style={{ maxWidth: "100%", height: "auto" }}
               />
             </div>
-            <div className="flex-shrink-0">
+            <div className="flex-shrink-0 w-full md:w-auto">
               <ImageWithFallback
                 src={displayImages[1]}
                 alt={`${projectTitle} - ${categoryName} - Image 2`}
                 className="w-full h-auto object-cover"
-                style={{ width: "743px", height: "674px" }}
+                style={{ maxWidth: "100%", height: "auto" }}
               />
             </div>
           </div>
@@ -50,7 +50,7 @@ export function ProductPhotographyCarousel({
               src={image}
               alt={`${projectTitle} - ${categoryName} - Image ${index + 3}`}
               className="w-full h-auto object-cover"
-              style={{ width: "1280px", height: "675px", objectPosition: "center 10%" }}
+              style={{ maxWidth: "100%", height: "auto", objectPosition: "center 10%" }}
             />
           </div>
         ))}
