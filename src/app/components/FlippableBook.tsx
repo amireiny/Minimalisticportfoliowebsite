@@ -158,12 +158,37 @@ export function FlippableBook({
 
   // Mobile open state with rotation
   if (isMobile && isOpen) {
+    // Calculate dimensions for landscape mode (rotated 90 degrees)
+    // When rotated, viewport width becomes height and vice versa
+    const landscapeWidth = window.innerHeight;
+    const landscapeHeight = window.innerWidth;
+    
+    // Scale the book to fit in landscape view with padding
+    const maxBookWidth = (landscapeWidth * 0.8) / 2; // 80% of landscape width, divided by 2 for each page
+    const maxBookHeight = landscapeHeight * 0.7; // 70% of landscape height
+    
+    // Determine actual dimensions based on aspect ratio
+    const bookWidth = Math.min(maxBookWidth, maxBookHeight * aspectRatio);
+    const bookHeight = bookWidth / aspectRatio;
+
     return (
-      <div className="fixed inset-0 z-50 bg-white flex items-center justify-center">
+      <div 
+        className="fixed inset-0 z-50 bg-white flex items-center justify-center"
+        style={{ touchAction: 'none' }}
+        onTouchStart={(e) => {
+          // Prevent browser back gesture
+          e.stopPropagation();
+        }}
+        onTouchMove={(e) => {
+          // Prevent browser back gesture
+          e.stopPropagation();
+        }}
+      >
         <button
           onClick={toggleOpen}
           className="absolute top-4 right-4 z-50 p-2 rounded-full bg-white hover:bg-neutral-100 transition-colors shadow-lg"
           aria-label="Close catalog"
+          style={{ touchAction: 'auto' }}
         >
           <X size={24} />
         </button>
@@ -172,11 +197,12 @@ export function FlippableBook({
           style={{
             transform: 'rotate(90deg)',
             transformOrigin: 'center center',
-            width: '100vh',
-            height: '100vw',
+            width: landscapeWidth,
+            height: landscapeHeight,
+            touchAction: 'pan-x pan-y',
           }}
         >
-          <div className="flex flex-col items-center gap-6 py-8">
+          <div className="flex flex-col items-center gap-4 py-4">
             <div 
               className="flex justify-center w-full"
               style={{ position: 'relative' }}
@@ -196,16 +222,16 @@ export function FlippableBook({
               >
                 <HTMLFlipBook
                   ref={bookRef}
-                  width={finalWidth}
-                  height={finalHeight}
+                  width={bookWidth}
+                  height={bookHeight}
                   size="stretch"
-                  minWidth={400}
+                  minWidth={200}
                   maxWidth={3000}
-                  minHeight={500}
+                  minHeight={200}
                   maxHeight={3000}
                   maxShadowOpacity={0.5}
                   showCover={true}
-                  mobileScrollSupport={true}
+                  mobileScrollSupport={false}
                   onFlip={onFlip}
                   className=""
                   style={{}}
@@ -244,16 +270,17 @@ export function FlippableBook({
             </div>
 
             {/* Navigation controls */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               <button
                 onClick={prevPage}
                 disabled={currentPage === 0}
                 className="p-2 rounded-full hover:bg-neutral-100 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                 aria-label="Previous page"
+                style={{ touchAction: 'auto' }}
               >
-                <ChevronLeft size={24} />
+                <ChevronLeft size={20} />
               </button>
-              <span className="text-sm text-neutral-600 min-w-[100px] text-center">
+              <span className="text-xs text-neutral-600 min-w-[80px] text-center">
                 Page {currentPage + 1} / {pageCount}
               </span>
               <button
@@ -261,8 +288,9 @@ export function FlippableBook({
                 disabled={currentPage >= pageCount - 2}
                 className="p-2 rounded-full hover:bg-neutral-100 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                 aria-label="Next page"
+                style={{ touchAction: 'auto' }}
               >
-                <ChevronRight size={24} />
+                <ChevronRight size={20} />
               </button>
             </div>
 
