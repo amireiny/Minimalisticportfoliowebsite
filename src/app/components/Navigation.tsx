@@ -16,13 +16,37 @@ export function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] =
     useState(false);
   const navRef = useRef<HTMLDivElement>(null);
+  const lastScrollY = useRef(0);
 
   const isHomePage = location.pathname === "/";
 
+  // Handle scroll direction to show/hide navigation
   useEffect(() => {
-    // Always keep navigation visible
-    setIsVisible(true);
-  }, [isHomePage]);
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Always show at the top
+      if (currentScrollY < 10) {
+        setIsVisible(true);
+      } 
+      // Show when scrolling up
+      else if (currentScrollY < lastScrollY.current) {
+        setIsVisible(true);
+      } 
+      // Hide when scrolling down
+      else if (currentScrollY > lastScrollY.current) {
+        setIsVisible(false);
+      }
+      
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   // Robust pixel-based background detection
   useEffect(() => {
@@ -87,61 +111,6 @@ export function Navigation() {
         }
       }
     };
-
-    // const detectColors = () => {
-    //   if (!navRef.current) return;
-
-    //   // Skip color detection on mobile when menu is open
-    //   if (window.innerWidth < 768 && isMobileMenuOpen) {
-    //     return;
-    //   }
-
-    //   try {
-    //     const navRect = navRef.current.getBoundingClientRect();
-    //     const navHeight = navRect.height;
-    //     const navTop = navRect.top;
-
-    //     // Sample signature area (left side, ~100px from left)
-    //     const sigX = 100;
-    //     const sigY = navTop + navHeight / 2;
-
-    //     // Sample text area (right side, ~200px from right)
-    //     const textX = window.innerWidth - 200;
-    //     const textY = navTop + navHeight / 2;
-
-    //     // Hide nav temporarily
-    //     navRef.current.style.opacity = '0';
-    //     navRef.current.style.pointerEvents = 'none';
-
-    //     // Use a small delay to ensure rendering
-    //     requestAnimationFrame(() => {
-    //       // Sample signature background
-    //       const sigElement = document.elementFromPoint(sigX, sigY);
-    //       const sigBg = getBackgroundColor(sigElement);
-    //       const sigLuminance = getLuminance(sigBg);
-    //       setSignatureColor(sigLuminance < 128 ? '#ffffff' : '#000000');
-
-    //       // Sample text background
-    //       const textElement = document.elementFromPoint(textX, textY);
-    //       const textBg = getBackgroundColor(textElement);
-    //       const textLuminance = getLuminance(textBg);
-    //       setTextColor(textLuminance < 128 ? '#ffffff' : '#000000');
-
-    //       // Always restore nav to visible state
-    //       if (navRef.current) {
-    //         navRef.current.style.opacity = '1';
-    //         navRef.current.style.pointerEvents = 'auto';
-    //       }
-    //     });
-    //   } catch (error) {
-    //     console.error('Color detection error:', error);
-    //     // Ensure nav is visible even if error occurs
-    //     if (navRef.current) {
-    //       navRef.current.style.opacity = '1';
-    //       navRef.current.style.pointerEvents = 'auto';
-    //     }
-    //   }
-    // };
 
     const getBackgroundColor = (
       element: Element | null,
@@ -222,21 +191,7 @@ export function Navigation() {
       ref={navRef}
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       style={{
-        backdropFilter: isMobileMenuOpen
-          ? "none"
-          : "blur(40px)",
-        WebkitBackdropFilter: isMobileMenuOpen
-          ? "none"
-          : "blur(40px)",
-        backgroundColor: isMobileMenuOpen
-          ? "rgb(255, 255, 255)"
-          : "rgba(255, 255, 255, 0.1)",
-        borderBottom: isMobileMenuOpen
-          ? "1px solid rgba(0, 0, 0, 0.1)"
-          : "1px solid rgba(255, 255, 255, 0.1)",
-        boxShadow: isMobileMenuOpen
-          ? "none"
-          : "0 2px 8px rgba(0, 0, 0, 0.05)",
+        backgroundColor: "rgb(255, 255, 255)",
         opacity: isVisible ? 1 : 0,
         transform: isVisible
           ? "translateY(0)"
@@ -245,7 +200,7 @@ export function Navigation() {
       }}
     >
       <div className="px-6">
-        <div className="max-w-7xl mx-auto py-6 flex items-center justify-between">
+        <div className="max-w-[2000px] mx-auto py-6 flex items-center justify-between">
           <Link
             to="/"
             onClick={handleHomeClick}
@@ -328,8 +283,8 @@ export function Navigation() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-12 text-sm">
             <a
-              href="#work"
-              className="transition-colors"
+              href="/#work"
+              className="transition-colors font-semibold text-[15px]"
               style={{ color: textColor }}
               onMouseEnter={(e) =>
                 (e.currentTarget.style.color = textHoverColor)
@@ -340,9 +295,22 @@ export function Navigation() {
             >
               Work
             </a>
-            <a
-              href="#contact"
-              className="transition-colors"
+            <Link
+              to="/about"
+              className="transition-colors font-semibold text-[16px]"
+              style={{ color: textColor }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.color = textHoverColor)
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.color = textColor)
+              }
+            >
+              About
+            </Link>
+            <Link
+              to="/contact"
+              className="transition-colors font-semibold text-[16px]"
               style={{ color: textColor }}
               onMouseEnter={(e) =>
                 (e.currentTarget.style.color = textHoverColor)
@@ -352,7 +320,7 @@ export function Navigation() {
               }
             >
               Contact
-            </a>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -418,7 +386,7 @@ export function Navigation() {
         <div className="px-6">
           <div className="max-w-7xl mx-auto flex flex-col pt-10 pb-6">
             <a
-              href="#work"
+              href="/#work"
               className="text-base text-neutral-900 hover:text-neutral-600 transition-colors text-center py-8"
               onClick={() => setIsMobileMenuOpen(false)}
             >
@@ -428,13 +396,24 @@ export function Navigation() {
               className="w-full h-px bg-neutral-900"
               style={{ opacity: 0.1 }}
             />
-            <a
-              href="#contact"
+            <Link
+              to="/about"
+              className="text-base text-neutral-900 hover:text-neutral-600 transition-colors text-center py-8"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              About
+            </Link>
+            <div
+              className="w-full h-px bg-neutral-900"
+              style={{ opacity: 0.1 }}
+            />
+            <Link
+              to="/contact"
               className="text-base text-neutral-900 hover:text-neutral-600 transition-colors text-center py-8"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Contact
-            </a>
+            </Link>
           </div>
         </div>
       </div>

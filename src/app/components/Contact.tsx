@@ -28,9 +28,7 @@ export function Contact() {
                   onClick={(e) => {
                     e.stopPropagation();
                   }}
-                >
-                  +972 58 709 9004
-                </a>
+                >+972 58 709 9004</a>
               </div>
             </div>
           </div>

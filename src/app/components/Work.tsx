@@ -4,10 +4,18 @@ import { Link } from "react-router-dom";
 
 const projects = [
   {
+    id: 4,
+    slug: "agilite",
+    title: "Agilite",
+    category: "Art Direction & Full-Suite Design / In-House",
+    image:
+      "https://res.cloudinary.com/dxog5mdzp/image/upload/v1774558260/agilite_head_5_urny0e.jpg",
+  },
+  {
     id: 1,
     slug: "hawkeye",
     title: "Hawkeye®",
-    category: "Branding",
+    category: "Branding & UX/UI",
     image:
       "https://res.cloudinary.com/dxog5mdzp/image/upload/v1773278256/hawkeye_head_jugiwb.jpg",
   },

@@ -2,6 +2,8 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Navigation } from './components/Navigation';
 import { HomePage } from './pages/HomePage';
 import { ProjectDetail } from './pages/ProjectDetail';
+import { ContactPage } from './pages/ContactPage';
+import { AboutPage } from './pages/AboutPage';
 import { useEffect, useState } from 'react';
 
 function AnimatedRoutes() {
@@ -27,6 +29,7 @@ function AnimatedRoutes() {
   }, [transitionStage, location]);
 
   const isProjectPage = location.pathname.startsWith('/project/');
+  const isContactPage = location.pathname === '/contact';
 
   return (
     <div
@@ -35,10 +38,12 @@ function AnimatedRoutes() {
         transition: 'opacity 300ms ease-in-out',
       }}
     >
-      {!isProjectPage && <Navigation />}
+      {!isProjectPage && !isContactPage && <Navigation />}
       <Routes location={displayLocation}>
         <Route path="/" element={<HomePage />} />
         <Route path="/project/:slug" element={<ProjectDetail />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/about" element={<AboutPage />} />
       </Routes>
     </div>
   );
@@ -47,7 +52,7 @@ function AnimatedRoutes() {
 export default function App() {
   return (
     <BrowserRouter>
-      <div className="min-h-screen" style={{ backgroundColor: '#fafaf9' }}>
+      <div className="min-h-screen" style={{ backgroundColor: '#ffffff' }}>
         <AnimatedRoutes />
       </div>
     </BrowserRouter>

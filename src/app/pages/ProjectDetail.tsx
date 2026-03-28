@@ -1,112 +1,20 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
-import { ImageWithFallback } from "../components/figma/ImageWithFallback";
-import { Footer } from "../components/Footer";
 import { Navigation } from "../components/Navigation";
-import { useEffect, useRef } from "react";
-
-// This would normally come from an API or database
-const projectsData = [
-  {
-    id: 1,
-    slug: "servizio-damore",
-    title: "Servizio d'Amore",
-    category: "Visual Identity",
-    images: [
-      "https://res.cloudinary.com/dhrtdasn6/image/upload/v1766596458/phototy/e6bbtfjo4oxaxik41uzo.jpg",
-      "https://res.cloudinary.com/dhrtdasn6/image/upload/v1766604579/phototy/sfvekkejzb7qdnpqziv3.jpg",
-      "https://res.cloudinary.com/dhrtdasn6/image/upload/v1766604579/phototy/lys7sxz1ttciskzotuzd.jpg",
-      "https://res.cloudinary.com/dhrtdasn6/image/upload/v1766604579/phototy/mtlxh0ufs15fhtkbgf1o.gif",
-      "https://res.cloudinary.com/dhrtdasn6/image/upload/v1766604579/phototy/wjhzjmxbtca4paouyu6z.jpg",
-      "https://res.cloudinary.com/dhrtdasn6/image/upload/v1766604579/phototy/rr84s3iy2jh1mqjoemad.jpg",
-      "https://res.cloudinary.com/dhrtdasn6/image/upload/v1766604579/phototy/btdr2b5n1tasubfc7aia.jpg",
-      "https://res.cloudinary.com/dhrtdasn6/image/upload/v1766604579/phototy/gx5d1odqnxllyxnuc7pa.jpg",
-      "https://res.cloudinary.com/dhrtdasn6/image/upload/v1766604578/phototy/mzvv99kz1chluby9eyvo.jpg",
-      "https://res.cloudinary.com/dhrtdasn6/image/upload/v1766604578/phototy/gd4u4yy2clvyupwvtuei.gif",
-    ],
-    year: "2025",
-    client: "Port Sa'id TLV",
-  },
-  {
-    id: 2,
-    slug: "hawkeye",
-    title: "Hawkeye®",
-    category: "Branding",
-    images: [
-      "https://res.cloudinary.com/dxog5mdzp/image/upload/v1773261427/hawkeye_1.jpeg_uose20.jpg",
-      "https://res.cloudinary.com/dxog5mdzp/image/upload/v1773261426/hawkeye_2_ub2iwp.jpg",
-      "https://res.cloudinary.com/dxog5mdzp/image/upload/v1773261427/hawkeye_3_bcmlld.jpg",
-      "https://res.cloudinary.com/dxog5mdzp/image/upload/v1773261428/hawkeye_4_wgloot.jpg",
-      "https://res.cloudinary.com/dxog5mdzp/image/upload/v1773261426/hawkeye_5_yy1lhn.jpg",
-      "https://res.cloudinary.com/dxog5mdzp/image/upload/v1773261427/hawkeye_6_xjvspu.jpg",
-      "https://res.cloudinary.com/dxog5mdzp/image/upload/v1773261427/hawkeye_7_tcgma1.jpg",
-      "https://res.cloudinary.com/dxog5mdzp/image/upload/v1773261426/hawkeye_8_mqyg1j.jpg",
-    ],
-    year: "2026",
-    client: "Hawkeye Technologies",
-  },
-  {
-    id: 3,
-    slug: "logos-marks",
-    title: "Logos & Marks",
-    category: "Logo Design",
-    images: [
-      "https://res.cloudinary.com/dxog5mdzp/image/upload/v1773262635/Logofolio25_01_ris21o.jpg",
-      "https://res.cloudinary.com/dxog5mdzp/image/upload/v1773262635/Logofolio25_02_fymavp.jpg",
-      "https://res.cloudinary.com/dxog5mdzp/image/upload/v1773262638/Logofolio25_03_iict6s.jpg",
-      "https://res.cloudinary.com/dxog5mdzp/image/upload/v1773262636/Logofolio25_04_ed3ydj.jpg",
-      "https://res.cloudinary.com/dxog5mdzp/image/upload/v1773262635/Logofolio25_05_nsnsgp.jpg",
-      "https://res.cloudinary.com/dxog5mdzp/image/upload/v1773262635/Logofolio25_06_thy2hp.jpg",
-      "https://res.cloudinary.com/dxog5mdzp/image/upload/v1773262636/Logofolio25_07_nyurbf.jpg",
-      "https://res.cloudinary.com/dxog5mdzp/image/upload/v1773262636/Logofolio25_08_jo6mig.jpg",
-      "https://res.cloudinary.com/dxog5mdzp/image/upload/v1773262636/Logofolio25_09_ayafub.jpg",
-      "https://res.cloudinary.com/dxog5mdzp/image/upload/v1773262636/Logofolio25_10_vxutu1.jpg",
-      "https://res.cloudinary.com/dxog5mdzp/image/upload/v1773262636/Logofolio25_end_x6vrqd.jpg",
-    ],
-    year: "2023-2024",
-    client: "Various Clients",
-  },
-];
+import { Footer } from "../components/Footer";
+import { ProjectSidebar } from "../components/ProjectSidebar";
+import { CategoryDropdownGallery } from "../components/CategoryDropdownGallery";
+import { StandardGallery } from "../components/StandardGallery";
+import { projectsData } from "../data/projects";
+import { useSwipeNavigation } from "../hooks/useSwipeNavigation";
+import { ArrowLeft } from "lucide-react";
 
 export function ProjectDetail() {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const project = projectsData.find((p) => p.slug === slug);
-  const touchStartX = useRef<number>(0);
-  const touchEndX = useRef<number>(0);
 
-  // Swipe gesture handler for mobile
-  useEffect(() => {
-    const handleTouchStart = (e: TouchEvent) => {
-      touchStartX.current = e.changedTouches[0].screenX;
-    };
-
-    const handleTouchEnd = (e: TouchEvent) => {
-      touchEndX.current = e.changedTouches[0].screenX;
-      handleSwipe();
-    };
-
-    const handleSwipe = () => {
-      // Only trigger on mobile (screen width < 768px)
-      if (window.innerWidth >= 768) return;
-
-      const swipeDistance = touchEndX.current - touchStartX.current;
-      const minSwipeDistance = 100; // Minimum distance for a swipe
-
-      // Left to right swipe (swipe distance is positive)
-      if (swipeDistance > minSwipeDistance) {
-        navigate("/");
-      }
-    };
-
-    document.addEventListener("touchstart", handleTouchStart);
-    document.addEventListener("touchend", handleTouchEnd);
-
-    return () => {
-      document.removeEventListener("touchstart", handleTouchStart);
-      document.removeEventListener("touchend", handleTouchEnd);
-    };
-  }, [navigate]);
+  // Enable swipe navigation for mobile
+  useSwipeNavigation();
 
   if (!project) {
     return (
@@ -131,21 +39,17 @@ export function ProjectDetail() {
 
   return (
     <div className="min-h-screen">
-      {/* Navigation */}
       <Navigation />
-      
-      {/* Content */}
+
       <div className="pt-28 md:pt-20 px-6 pb-24">
         <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-12 gap-12">
-            {/* Left Column - Sticky Project Info */}
-            <div className="md:col-span-3">
-              <div className="md:sticky md:top-32">
-                {/* Back Button positioned to the left of title */}
-                <div className="relative mb-6">
-                  <h1 className="text-[16px] font-bold">
-                    {project.title}
-                  </h1>
+          <div>
+            {/* Top section with title, description, and metadata */}
+            <div className="grid md:grid-cols-12 gap-12 mb-20 mt-20">
+              {/* Left side - Title and Description */}
+              <div className="md:col-span-7">
+                <div className="relative mb-8">
+                  <h1 className="text-[18px] font-bold">{project.title}</h1>
                   <button
                     onClick={handleBackClick}
                     className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full mr-4 flex items-center text-neutral-400 hover:text-neutral-900 transition-all duration-300 hover:-translate-x-[calc(100%+6px)]"
@@ -155,54 +59,46 @@ export function ProjectDetail() {
                     <ArrowLeft size={20} />
                   </button>
                 </div>
-
-                <p className="text-[14px] text-neutral-600 mb-8">
-                  {project.category}
+                <p className="text-[16px] text-neutral-600 leading-relaxed ml-[0px] mr-[101px] my-[0px] text-justify p-[0px] font-normal">
+                  {project.description}
                 </p>
+              </div>
 
-                <div className="space-y-6">
+              {/* Right side - Metadata in two columns */}
+              <div className="md:col-span-5">
+                <div className="grid grid-cols-2 gap-x-8 gap-y-6">
                   <div>
-                    <p className="text-[12px] text-neutral-400 mb-1">
+                    <p className="text-neutral-400 mb-1 text-[14px]">
                       Client
                     </p>
-                    <p className="text-[14px]">
-                      {project.client}
-                    </p>
+                    <p className="text-[16px] font-normal">{project.client}</p>
                   </div>
                   <div>
-                    <p className="text-[12px] text-neutral-400 mb-1">
-                      Year
-                    </p>
-                    <p className="text-[14px]">
-                      {project.year}
-                    </p>
+                    <p className="text-neutral-400 mb-1 text-[14px]">Year</p>
+                    <p className="text-[16px] font-normal">{project.year}</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Right Column - Project Images */}
-            <div className="md:col-span-9">
-              <div className="">
-                {project.images.map((image, index) => (
-                  <div
-                    key={index}
-                    className="w-full bg-neutral-100 overflow-hidden"
-                  >
-                    <ImageWithFallback
-                      src={image}
-                      alt={`${project.title} - Image ${index + 1}`}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
+            {/* Images section - full width */}
+            <div>
+              {project.hasCategories && project.categorizedImages ? (
+                <CategoryDropdownGallery
+                  categorizedImages={project.categorizedImages}
+                  projectTitle={project.title}
+                />
+              ) : (
+                <StandardGallery
+                  images={project.images || []}
+                  projectTitle={project.title}
+                />
+              )}
             </div>
           </div>
         </div>
       </div>
 
-      {/* Footer */}
       <Footer />
     </div>
   );
