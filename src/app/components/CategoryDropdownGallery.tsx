@@ -145,9 +145,7 @@ export function CategoryDropdownGallery({
                           <button
                             type="submit"
                             className="bg-neutral-800 text-white px-4 py-2 rounded"
-                          >
-                            Unlock
-                          </button>
+                          >Access</button>
                         </form>
                         {showPasswordError && (
                           <p className="text-red-500 mt-2">Incorrect password</p>
