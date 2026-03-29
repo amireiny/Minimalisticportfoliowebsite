@@ -102,7 +102,7 @@ export function CorporateGallery({
   return (
     <>
       {/* Desktop: Grid layout */}
-      <div className="hidden md:grid grid-cols-3 gap-4">
+      <div className="hidden md:grid grid-cols-4 gap-4">
         {images.map((image, index) => (
           <div
             key={index}
