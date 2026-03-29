@@ -59,7 +59,7 @@ export function ProjectDetail() {
                     <ArrowLeft size={20} />
                   </button>
                 </div>
-                <p className="text-[16px] text-neutral-600 leading-relaxed ml-[0px] mr-[101px] my-[0px] text-justify p-[0px] font-normal">
+                <p className="text-neutral-600 leading-relaxed font-normal text-[15px] text-left ml-[0px] mr-[101px] my-[0px] p-[0px]">
                   {project.description}
                 </p>
               </div>
@@ -68,14 +68,14 @@ export function ProjectDetail() {
               <div className="md:col-span-5">
                 <div className="grid grid-cols-2 gap-x-8 gap-y-6">
                   <div>
-                    <p className="text-neutral-400 mb-1 text-[14px]">
+                    <p className="text-neutral-400 mb-1 text-[13px]">
                       Client
                     </p>
-                    <p className="text-[16px] font-normal">{project.client}</p>
+                    <p className="font-normal text-[15px]">{project.client}</p>
                   </div>
                   <div>
-                    <p className="text-neutral-400 mb-1 text-[14px]">Year</p>
-                    <p className="text-[16px] font-normal">{project.year}</p>
+                    <p className="text-neutral-400 mb-1 text-[13px]">Year</p>
+                    <p className="font-normal text-[15px]">{project.year}</p>
                   </div>
                 </div>
               </div>
