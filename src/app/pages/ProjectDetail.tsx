@@ -47,9 +47,19 @@ export function ProjectDetail() {
             {/* Top section with title, description, and metadata */}
             <div className="grid md:grid-cols-12 gap-12 mb-20 mt-20">
               {/* Left side - Title and Description */}
-              <div className="md:col-span-7">
+              <div
+                className="md:col-span-7 p-[0px] -mt-8 md:mt-0"
+                style={{
+                  paddingTop: "-30px",
+                  paddingRight: "0px",
+                  paddingBottom: "-40px",
+                  paddingLeft: "0px",
+                }}
+              >
                 <div className="relative mb-8">
-                  <h1 className="text-[18px] font-bold">{project.title}</h1>
+                  <h1 className="text-[18px] font-bold">
+                    {project.title}
+                  </h1>
                   <button
                     onClick={handleBackClick}
                     className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full mr-4 flex items-center text-neutral-400 hover:text-neutral-900 transition-all duration-300 hover:-translate-x-[calc(100%+6px)]"
@@ -59,7 +69,7 @@ export function ProjectDetail() {
                     <ArrowLeft size={20} />
                   </button>
                 </div>
-                <p className="text-neutral-600 leading-relaxed font-normal text-[15px] text-left ml-[0px] mr-[101px] my-[0px] p-[0px]">
+                <p className="text-neutral-600 leading-relaxed font-normal text-[15px] text-left ml-[0px] mr-[65px] my-[0px] p-[0px]">
                   {project.description}
                 </p>
               </div>
@@ -71,11 +81,17 @@ export function ProjectDetail() {
                     <p className="text-neutral-400 mb-1 text-[13px]">
                       Client
                     </p>
-                    <p className="font-normal text-[15px]">{project.client}</p>
+                    <p className="font-normal text-[15px]">
+                      {project.client}
+                    </p>
                   </div>
                   <div>
-                    <p className="text-neutral-400 mb-1 text-[13px]">Year</p>
-                    <p className="font-normal text-[15px]">{project.year}</p>
+                    <p className="text-neutral-400 mb-1 text-[13px]">
+                      Year
+                    </p>
+                    <p className="font-normal text-[15px]">
+                      {project.year}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -83,7 +99,8 @@ export function ProjectDetail() {
 
             {/* Images section - full width */}
             <div>
-              {project.hasCategories && project.categorizedImages ? (
+              {project.hasCategories &&
+              project.categorizedImages ? (
                 <CategoryDropdownGallery
                   categorizedImages={project.categorizedImages}
                   projectTitle={project.title}
