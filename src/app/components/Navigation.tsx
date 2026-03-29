@@ -372,15 +372,16 @@ export function Navigation() {
 
       {/* Mobile Sliding Menu */}
       <div
-        className={`md:hidden fixed left-0 right-0 transition-all duration-300 ease-in-out z-40 ${
+        className={`md:hidden fixed left-0 right-0 transition-all duration-300 ease-in-out ${
           isMobileMenuOpen
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 -translate-y-4 pointer-events-none"
+            ? "opacity-100 translate-y-0 z-40"
+            : "opacity-0 -translate-y-4 pointer-events-none -z-10"
         }`}
         style={{
           top: "72px",
           backgroundColor: "rgb(255, 255, 255)",
           borderBottom: "1px solid rgba(0, 0, 0, 0.1)",
+          visibility: isMobileMenuOpen ? "visible" : "hidden",
         }}
       >
         <div className="px-6">
@@ -389,6 +390,7 @@ export function Navigation() {
               href="/#work"
               className="text-base text-neutral-900 hover:text-neutral-600 transition-colors text-center py-8"
               onClick={() => setIsMobileMenuOpen(false)}
+              style={{ pointerEvents: isMobileMenuOpen ? "auto" : "none" }}
             >
               Work
             </a>
@@ -400,6 +402,7 @@ export function Navigation() {
               to="/about"
               className="text-base text-neutral-900 hover:text-neutral-600 transition-colors text-center py-8"
               onClick={() => setIsMobileMenuOpen(false)}
+              style={{ pointerEvents: isMobileMenuOpen ? "auto" : "none" }}
             >
               About
             </Link>
@@ -411,6 +414,7 @@ export function Navigation() {
               to="/contact"
               className="text-base text-neutral-900 hover:text-neutral-600 transition-colors text-center py-8"
               onClick={() => setIsMobileMenuOpen(false)}
+              style={{ pointerEvents: isMobileMenuOpen ? "auto" : "none" }}
             >
               Contact
             </Link>
