@@ -7,11 +7,28 @@ export interface Project {
   year: string;
   client: string;
   hasCategories?: boolean;
+  horizontalCategories?: boolean;
   categorizedImages?: Record<string, string[]>;
   images?: string[];
 }
 
 export const projectsData: Project[] = [
+  {
+    id: 5,
+    slug: "wix-web-design-festival",
+    title: "Wix Web Design Festival",
+    description: "Branding and UX/UI design for the Wix Web Design Festival.",
+    category: "Branding & UX/UI",
+    year: "2026",
+    client: "Base44 (Wix)",
+    hasCategories: true,
+    horizontalCategories: true,
+    categorizedImages: {
+      "UX/UI": [],
+      "Branding": [],
+      "Research": [],
+    },
+  },
   {
     id: 4,
     slug: "agilite",

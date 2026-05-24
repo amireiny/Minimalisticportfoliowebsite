@@ -4,6 +4,14 @@ import { Link } from "react-router-dom";
 
 const projects = [
   {
+    id: 5,
+    slug: "wix-web-design-festival",
+    title: "Wix Web Design Festival",
+    category: "Branding & UX/UI",
+    image:
+      "https://res.cloudinary.com/dxog5mdzp/image/upload/v1779619008/WWD_head2_vb4nuu.jpg",
+  },
+  {
     id: 4,
     slug: "agilite",
     title: "Agilite",

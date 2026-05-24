@@ -1,4 +1,5 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { Navigation } from "../components/Navigation";
 import { Footer } from "../components/Footer";
 import { ProjectSidebar } from "../components/ProjectSidebar";
@@ -6,7 +7,66 @@ import { CategoryDropdownGallery } from "../components/CategoryDropdownGallery";
 import { StandardGallery } from "../components/StandardGallery";
 import { projectsData } from "../data/projects";
 import { useSwipeNavigation } from "../hooks/useSwipeNavigation";
+import { useIsMobile } from "../hooks/useIsMobile";
 import { ArrowLeft } from "lucide-react";
+
+const FIGMA_PROTOTYPE_URLS: Record<string, string> = {
+  "UX/UI": "https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/proto/Jo3PWgeiP57YfLT66dwwLR/WWD---Wix-Web-Design-Festival--Home-Assignment--Base44-?node-id=96-201&p=f&scaling=scale-down-width&starting-point-node-id=96%3A201&page-id=0%3A1",
+  "Branding": "https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/proto/Jo3PWgeiP57YfLT66dwwLR/WWD---Wix-Web-Design-Festival--Home-Assignment--Base44-?node-id=214-185&p=f&scaling=min-zoom&page-id=214%3A184",
+  "Research": "https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/proto/Jo3PWgeiP57YfLT66dwwLR/WWD---Wix-Web-Design-Festival--Base44-?node-id=277-291&p=f&scaling=scale-down-width&page-id=277%3A290",
+};
+
+const FIGMA_PROTOTYPE_URLS_MOBILE: Record<string, string> = {
+  "UX/UI": "https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/proto/Jo3PWgeiP57YfLT66dwwLR/WWD---Wix-Web-Design-Festival--Home-Assignment--Base44-?node-id=96-201&p=f&scaling=scale-down-width&starting-point-node-id=96%3A201&page-id=0%3A1",
+  "Branding": "https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/proto/Jo3PWgeiP57YfLT66dwwLR/WWD---Wix-Web-Design-Festival--Home-Assignment--Base44-?node-id=214-185&p=f&scaling=scale-down-width&page-id=214%3A184",
+  "Research": "https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/proto/Jo3PWgeiP57YfLT66dwwLR/WWD---Wix-Web-Design-Festival--Base44-?node-id=277-291&p=f&scaling=scale-down-width&page-id=277%3A290",
+};
+
+function HorizontalCategoryGallery({ categorizedImages }: { categorizedImages: Record<string, string[]> }) {
+  const tabs = Object.keys(categorizedImages);
+  const [activeTab, setActiveTab] = useState(tabs[0]);
+  const isMobile = useIsMobile();
+
+  return (
+    <div>
+      <div className="flex gap-0 border-b border-neutral-200 mb-8">
+        {tabs.map((tab) => (
+          <button
+            key={tab}
+            onClick={() => setActiveTab(tab)}
+            className={`py-3 px-4 text-[13px] md:py-4 md:px-10 md:text-[16px] font-bold transition-colors duration-200 ${
+              activeTab === tab
+                ? "text-neutral-900 border-b-2 border-neutral-900 -mb-px"
+                : "text-neutral-400 hover:text-neutral-600"
+            }`}
+          >
+            {tab}
+          </button>
+        ))}
+      </div>
+      {tabs.map((tab) => {
+        const url = (isMobile && FIGMA_PROTOTYPE_URLS_MOBILE[tab]) ? FIGMA_PROTOTYPE_URLS_MOBILE[tab] : FIGMA_PROTOTYPE_URLS[tab];
+        const isActive = tab === activeTab;
+        if (url) {
+          return (
+            <div key={tab} className="w-full" style={{ display: isActive ? "block" : "none" }}>
+              <iframe
+                src={url}
+                className="w-full border-0"
+                style={{ height: tab === "Branding" ? (isMobile ? "2156px" : "8505px") : tab === "UX/UI" ? (isMobile ? "1500px" : "5872px") : tab === "Research" ? (isMobile ? "1050px" : "3828px") : "90vh" }}
+                allowFullScreen
+                title={`${tab} prototype`}
+              />
+            </div>
+          );
+        }
+        return isActive ? (
+          <StandardGallery key={tab} images={categorizedImages[tab]} projectTitle={tab} />
+        ) : null;
+      })}
+    </div>
+  );
+}
 
 export function ProjectDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -99,12 +159,15 @@ export function ProjectDetail() {
 
             {/* Images section - full width */}
             <div>
-              {project.hasCategories &&
-              project.categorizedImages ? (
-                <CategoryDropdownGallery
-                  categorizedImages={project.categorizedImages}
-                  projectTitle={project.title}
-                />
+              {project.hasCategories && project.categorizedImages ? (
+                project.horizontalCategories ? (
+                  <HorizontalCategoryGallery categorizedImages={project.categorizedImages} />
+                ) : (
+                  <CategoryDropdownGallery
+                    categorizedImages={project.categorizedImages}
+                    projectTitle={project.title}
+                  />
+                )
               ) : (
                 <StandardGallery
                   images={project.images || []}
