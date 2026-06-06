@@ -67,14 +67,6 @@ const projects = [
     image:
       "https://res.cloudinary.com/dxog5mdzp/image/upload/v1780604207/homepage-project-preview_sda_mvb9d2.jpg",
   },
-  {
-    id: 3,
-    slug: "logos-marks",
-    title: "Logos & Marks",
-    category: "Logo Design",
-    image:
-      "https://res.cloudinary.com/dxog5mdzp/image/upload/v1773278537/Logofolio25_head_3_nvhcuy.jpg",
-  },
 ];
 
 export function DesktopHome() {
@@ -227,11 +219,17 @@ export function DesktopHome() {
 
   const goToIndex = useCallback((nextIndex: number) => {
     if (isTransitioning.current) return;
-    if (nextIndex < 0 || nextIndex >= projects.length) return;
+    // Wrap around for infinite scroll
+    let wrappedIndex = nextIndex;
+    if (nextIndex < 0) {
+      wrappedIndex = projects.length - 1;
+    } else if (nextIndex >= projects.length) {
+      wrappedIndex = 0;
+    }
     isTransitioning.current = true;
     setVisible(false);
     setTimeout(() => {
-      setCurrentIndex(nextIndex);
+      setCurrentIndex(wrappedIndex);
       setVisible(true);
       setTimeout(() => {
         isTransitioning.current = false;
