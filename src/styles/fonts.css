@@ -1,37 +1,37 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
 @font-face {
-  font-family: 'Asta Sans';
+  font-family: 'Asta';
   src: url('/fonts/AstaSans-Light.ttf') format('truetype');
   font-weight: 300;
   font-display: swap;
 }
 @font-face {
-  font-family: 'Asta Sans';
+  font-family: 'Asta';
   src: url('/fonts/AstaSans-Regular.ttf') format('truetype');
   font-weight: 400;
   font-display: swap;
 }
 @font-face {
-  font-family: 'Asta Sans';
+  font-family: 'Asta';
   src: url('/fonts/AstaSans-Medium.ttf') format('truetype');
   font-weight: 500;
   font-display: swap;
 }
 @font-face {
-  font-family: 'Asta Sans';
+  font-family: 'Asta';
   src: url('/fonts/AstaSans-SemiBold.ttf') format('truetype');
   font-weight: 600;
   font-display: swap;
 }
 @font-face {
-  font-family: 'Asta Sans';
+  font-family: 'Asta';
   src: url('/fonts/AstaSans-Bold.ttf') format('truetype');
   font-weight: 700;
   font-display: swap;
 }
 @font-face {
-  font-family: 'Asta Sans';
+  font-family: 'Asta';
   src: url('/fonts/AstaSans-ExtraBold.ttf') format('truetype');
   font-weight: 800;
   font-display: swap;
