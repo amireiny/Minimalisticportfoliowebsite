@@ -51,7 +51,7 @@ export function ContactPage() {
   };
 
   return (
-    <div style={{ fontFamily: "'Asta Sans', Arial, sans-serif" }}>
+    <div style={{ fontFamily: "Asta, Arial, sans-serif" }}>
       <Navigation />
       <div className="min-h-screen pt-28 md:pt-20 pb-32 px-6">
         <div className="max-w-3xl mx-auto px-[0px] pt-[0px] pb-[0px] mt-20">

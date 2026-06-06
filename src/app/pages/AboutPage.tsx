@@ -6,7 +6,7 @@ export function AboutPage() {
   return (
     <div
       className="min-h-screen flex flex-col"
-      style={{ fontFamily: "'Asta Sans', Arial, sans-serif" }}
+      style={{ fontFamily: "Asta, Arial, sans-serif" }}
     >
       <Navigation />
 

@@ -306,7 +306,7 @@ export function DesktopHome() {
       <div
         className="w-[38%] flex-shrink-0 h-screen fixed left-0 top-0 flex flex-col justify-between px-10 py-12 border-r border-neutral-100 bg-white z-10 overflow-visible"
         style={{
-          fontFamily: "'Asta Sans', Arial, sans-serif",
+          fontFamily: "Asta, Arial, sans-serif",
         }}
       >
         {/* Top: name + tagline */}
@@ -466,7 +466,7 @@ export function DesktopHome() {
                   top: "48px",
                   letterSpacing: "-0.07em",
                   lineHeight: "0.9",
-                  fontFamily: "'Asta Sans', Arial, sans-serif",
+                  fontFamily: "Asta, Arial, sans-serif",
                 }}
               >
                 {typedText.split("\n").map((line, i) => (
