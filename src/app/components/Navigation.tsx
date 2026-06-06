@@ -15,6 +15,7 @@ export function Navigation() {
   const [textColor, setTextColor] = useState("#000000");
   const [isMobileMenuOpen, setIsMobileMenuOpen] =
     useState(false);
+  const [hoveredNavLink, setHoveredNavLink] = useState<string | null>(null);
   const navRef = useRef<HTMLDivElement>(null);
   const lastScrollY = useRef(0);
 
@@ -282,44 +283,32 @@ export function Navigation() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-12 text-sm">
-            <a
-              href="/#work"
-              className="transition-colors font-semibold text-[15px]"
+            <Link
+              to="/work"
+              className="font-semibold text-[15px] no-underline hover:underline hover:underline-offset-4 transition-none uppercase"
               style={{ color: textColor }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.color = textHoverColor)
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.color = textColor)
-              }
+              onMouseEnter={() => setHoveredNavLink("work")}
+              onMouseLeave={() => setHoveredNavLink(null)}
             >
-              Work
-            </a>
+              <span style={{ opacity: hoveredNavLink === "work" ? 1 : 0 }}>✢ </span>WORK
+            </Link>
             <Link
               to="/about"
-              className="transition-colors font-semibold text-[16px]"
+              className="font-semibold text-[15px] no-underline hover:underline hover:underline-offset-4 transition-none uppercase"
               style={{ color: textColor }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.color = textHoverColor)
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.color = textColor)
-              }
+              onMouseEnter={() => setHoveredNavLink("about")}
+              onMouseLeave={() => setHoveredNavLink(null)}
             >
-              About
+              <span style={{ opacity: hoveredNavLink === "about" ? 1 : 0 }}>✢ </span>ABOUT
             </Link>
             <Link
               to="/contact"
-              className="transition-colors font-semibold text-[16px]"
+              className="font-semibold text-[15px] no-underline hover:underline hover:underline-offset-4 transition-none uppercase"
               style={{ color: textColor }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.color = textHoverColor)
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.color = textColor)
-              }
+              onMouseEnter={() => setHoveredNavLink("contact")}
+              onMouseLeave={() => setHoveredNavLink(null)}
             >
-              Contact
+              <span style={{ opacity: hoveredNavLink === "contact" ? 1 : 0 }}>✢ </span>CONTACT
             </Link>
           </div>
 
@@ -386,14 +375,14 @@ export function Navigation() {
       >
         <div className="px-6">
           <div className="max-w-7xl mx-auto flex flex-col pt-10 pb-6">
-            <a
-              href="/#work"
+            <Link
+              to="/work"
               className="text-base text-neutral-900 hover:text-neutral-600 transition-colors text-center py-8"
               onClick={() => setIsMobileMenuOpen(false)}
               style={{ pointerEvents: isMobileMenuOpen ? "auto" : "none" }}
             >
               Work
-            </a>
+            </Link>
             <div
               className="w-full h-px bg-neutral-900"
               style={{ opacity: 0.1 }}

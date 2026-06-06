@@ -15,7 +15,7 @@ const projects = [
     id: 4,
     slug: "agilite",
     title: "Agilite",
-    category: "Art Direction & Full-Suite Design / In-House",
+    category: "Art Direction ✢ Full-suite design",
     image:
       "https://res.cloudinary.com/dxog5mdzp/image/upload/v1774558260/agilite_head_5_urny0e.jpg",
   },
@@ -31,7 +31,7 @@ const projects = [
     id: 2,
     slug: "servizio-damore",
     title: "Servizio d'Amore",
-    category: "Visual Identity",
+    category: "Visual Identity ✢ Illustration",
     image:
       "https://res.cloudinary.com/dhrtdasn6/image/upload/v1766436877/phototy/mf1o4kzfwsnf2fchxq6t.jpg",
   },

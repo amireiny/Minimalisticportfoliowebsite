@@ -4,6 +4,7 @@ import { HomePage } from './pages/HomePage';
 import { ProjectDetail } from './pages/ProjectDetail';
 import { ContactPage } from './pages/ContactPage';
 import { AboutPage } from './pages/AboutPage';
+import { WorkPage } from './pages/WorkPage';
 import { useEffect, useState } from 'react';
 
 function AnimatedRoutes() {
@@ -30,6 +31,7 @@ function AnimatedRoutes() {
 
   const isProjectPage = location.pathname.startsWith('/project/');
   const isContactPage = location.pathname === '/contact';
+  const isHomePage = location.pathname === '/';
 
   return (
     <div
@@ -38,12 +40,17 @@ function AnimatedRoutes() {
         transition: 'opacity 300ms ease-in-out',
       }}
     >
-      {!isProjectPage && !isContactPage && <Navigation />}
+      {!isProjectPage && !isContactPage && (
+        <div className={isHomePage ? 'md:hidden' : ''}>
+          <Navigation />
+        </div>
+      )}
       <Routes location={displayLocation}>
         <Route path="/" element={<HomePage />} />
         <Route path="/project/:slug" element={<ProjectDetail />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/work" element={<WorkPage />} />
       </Routes>
     </div>
   );
@@ -52,7 +59,7 @@ function AnimatedRoutes() {
 export default function App() {
   return (
     <BrowserRouter>
-      <div className="min-h-screen" style={{ backgroundColor: '#ffffff' }}>
+      <div className="min-h-screen bg-white">
         <AnimatedRoutes />
       </div>
     </BrowserRouter>

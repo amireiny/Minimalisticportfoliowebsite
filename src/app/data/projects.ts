@@ -35,7 +35,7 @@ export const projectsData: Project[] = [
     title: "Agilite",
     description:
       "During my time at Agilite, I've created and led the company's global brand identity and creative direction, collaborating across every department from marketing to upper management to deliver content that speaks the company's values, identity and goals.\n\nI've managed the full design workflow and mentored the junior team, ensuring creative excellence from complex concepts to crystal-clear, on-brand delivery.",
-    category: "Art Direction & Full-Suite Design / In-House",
+    category: "Art Direction ✢ Full-suite design",
     year: "2023-2026",
     client: "Agilite",
     hasCategories: true,
@@ -140,7 +140,7 @@ export const projectsData: Project[] = [
     title: "Servizio d'Amore",
     description:
       "A visual identity project for Port Sa'id TLV.",
-    category: "Visual Identity",
+    category: "Visual Identity ✢ Illustration",
     images: [
       "https://res.cloudinary.com/dhrtdasn6/image/upload/v1766596458/phototy/e6bbtfjo4oxaxik41uzo.jpg",
       "https://res.cloudinary.com/dhrtdasn6/image/upload/v1766604579/phototy/sfvekkejzb7qdnpqziv3.jpg",
@@ -174,6 +174,19 @@ export const projectsData: Project[] = [
     ],
     year: "2026",
     client: "Hawkeye Technologies",
+  },
+  {
+    id: 6,
+    slug: "maxo-kream-tour",
+    title: "Maxo Kream Tour",
+    description: "Album art and poster design for Maxo Kream's '22 Tour.",
+    category: "Graphic Design",
+    images: [
+      "https://res.cloudinary.com/dxog5mdzp/image/upload/v1780748068/maxo-album-gif_aguj3b.gif",
+      "https://res.cloudinary.com/dxog5mdzp/image/upload/v1780748068/maxo-poster-gif_gq5gha.gif",
+    ],
+    year: "2022",
+    client: "PERSONA",
   },
   {
     id: 3,
